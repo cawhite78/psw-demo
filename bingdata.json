@@ -1,0 +1,31 @@
+{
+  "_type": "SpellCheck",
+  "flaggedTokens": [
+    {
+      "offset": 0,
+      "token": "clorinenated",
+      "type": "UnknownToken",
+      "suggestions": [
+        {
+          "suggestion": "chlorinated",
+          "score": 0.808975915197711
+        },
+        {
+          "suggestion": "chlorinating",
+          "score": 0.729954553900004
+        }
+      ]
+    },
+    {
+      "offset": 13,
+      "token": "taabs",
+      "type": "UnknownToken",
+      "suggestions": [
+        {
+          "suggestion": "tabs",
+          "score": 0.808975915197711
+        }
+      ]
+    }
+  ]
+}
