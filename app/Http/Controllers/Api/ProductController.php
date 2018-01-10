@@ -12,15 +12,16 @@ class ProductController extends Controller
     public function getProduct($productId)
     {
         $product = ProductMaster::where('id',$productId)->first();
-        return response(json_decode($product['media'],1));
+        return response()->json($product);
     }
 
     public function productIndex(Request $request, $productId)
     {
         /** @var ProductMaster $product */
-        $product = $this->getProduct($productId);
+        $product = ProductMaster::where('id',$productId)->first();
+
         return view('product',[
-            'data' => $product->toArray()
+            'data' => $product
         ]);
     }
 }

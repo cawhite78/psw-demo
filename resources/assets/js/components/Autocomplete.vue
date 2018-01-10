@@ -34,7 +34,7 @@
 
                         </div>
                         <div class="col-6">
-                            
+
                             <img v-bind:src="result.primary_image"
                                  style="width:200px; height:auto; float:right;">
                         </div>
