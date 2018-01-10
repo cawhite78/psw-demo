@@ -1,6 +1,5 @@
 @extends('layouts.app2')
 @section('content')
-
    @php
       $images = json_decode($data['images'],1);
    @endphp
@@ -23,3 +22,7 @@
       </a>
    </div>
 @endsection
+<script>
+  $('.carousel').carousel()
+
+</script>
