@@ -11,7 +11,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <script>
+    @php
+    if(isset($data))
+    {
+    @endphp
+        let productImages = {{$data['media']}};
+    @php
+    }
+    @endphp
+    </script>
 </head>
 <body>
 <div id="app">

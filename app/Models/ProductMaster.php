@@ -18,7 +18,8 @@ class ProductMaster extends Model
      * @var string
      */
     protected $table = 'products_master';
-
+    protected $guarded = [];
+    protected $hidden = [];
     /**
      * Get the index name for the model.
      *

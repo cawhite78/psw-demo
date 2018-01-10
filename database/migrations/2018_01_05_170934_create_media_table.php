@@ -19,6 +19,8 @@ class CreateMediaTable extends Migration
             $table->string('filename');
             $table->boolean('is_primary')->default(0);
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

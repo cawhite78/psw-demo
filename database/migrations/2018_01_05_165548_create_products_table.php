@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('type_category');
             $table->integer('brand');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

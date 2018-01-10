@@ -21,19 +21,16 @@ Route::get('/', function(){
 
 Auth::routes();
 
-Route::get('api/search','Api\SearchController@querySearch');
-//Route::get('/api/search',function(){
-//    $query = Input::get('query');
-//    $users = ProductMaster::where('name','like','%'.$query.'%')->get();
-//    return response()->json($users);
-//});
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search', 'HomeController@search')->name('search');
 Route::get('/vue-search', function(){
     return view('vue-search');
 } );
+Route::get('/', 'HomeController@search')->name('home');
+Route::get('/search', 'HomeController@search')->name('search');
+Route::get('/product/{productId}', 'Api\ProductController@productIndex')->name('product');
+
 
 Route::get('api/search','Api\SearchController@querySearch');
 Route::get('api/spelling','Api\SuggestsController@querySuggests');
+Route::get('api/product/{productId}','Api\ProductController@getProduct');
+
 

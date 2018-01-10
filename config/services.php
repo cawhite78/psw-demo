@@ -49,5 +49,33 @@ return [
             'host' =>'https://api.cognitive.microsoft.com',
             'path' => '/bing/v7.0/spellcheck?'
         ],
+    ],
+    'lps' => [
+        'endpoint' =>'http://www.poolsupplyworld.com/api.cfm?productid=',
+        'authkey' => 'I0LTLQSFVVWS7QE-corey',
+        'product_ids' => [
+            2170,
+            2174,
+            19306,
+            103799,
+            142608,
+            2218,
+            40568,
+            27971,
+            19650,
+            193903,
+            141438,
+            270437,
+            184070,
+            926,
+            88381,
+            26457,
+            194517,
+            193392,
+            57015,
+            57014,
+            98661,
+            148541
+        ]
     ]
 ];

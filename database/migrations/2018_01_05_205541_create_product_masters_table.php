@@ -18,12 +18,13 @@ class CreateProductMastersTable extends Migration
             $table->primary('id');
             $table->string('name',128);
             $table->boolean('above_ground')->nullable();
-            $table->text('attributes')->nullable();
             $table->text('description')->nullable();
             $table->string('type_category');
             $table->string('brand');
             $table->text('media')->nullable();
+            $table->string('primary_image',128)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

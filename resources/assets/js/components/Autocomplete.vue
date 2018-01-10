@@ -34,7 +34,8 @@
 
                         </div>
                         <div class="col-6">
-                            <img v-bind:src="'http://edc.poolsupplyworld.com/wimages/product_image/' + result.primary_image"
+                            
+                            <img v-bind:src="result.primary_image"
                                  style="width:200px; height:auto; float:right;">
                         </div>
                     </div>
@@ -81,15 +82,18 @@
         this.getSearch();
       },
       getSearch() {
-        axios.get('/api/search', {params: {q: this.q}}).then(response => {
-          this.results = response.data.results;
-          console.log(response.data.results);
-          if (!this.results) {
-            //this.getSpellCheck(this.q);
-          }
-        });
+        if(this.q.length > 2) {
+          axios.get('/api/search', {params: {q: this.q}}).then(response => {
+            this.results = response.data.results;
+            console.log(response.data.results);
+            if (!this.results) {
+              //this.getSpellCheck(this.q);
+            }
+          });
+        }
       },
       getSpellCheck() {
+        return true;
         axios.get('/api/spelling', {params: {q: this.q}}).then(response => {
 
           this.suggests = response.data.results;
