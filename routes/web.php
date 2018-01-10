@@ -30,7 +30,11 @@ Route::get('/product/{productId}', 'Api\ProductController@productIndex')->name('
 
 
 Route::get('api/search','Api\SearchController@querySearch');
+Route::get('api/search-full','Api\SearchController@querySearchFull');
+
 Route::get('api/spelling','Api\SuggestsController@querySuggests');
+Route::get('api/spelling2','Api\SuggestsController@querySuggestsFromDom');
+
 Route::get('api/product/{productId}','Api\ProductController@getProduct');
 
 

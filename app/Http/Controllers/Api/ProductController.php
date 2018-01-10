@@ -12,16 +12,30 @@ class ProductController extends Controller
     public function getProduct($productId)
     {
         $product = ProductMaster::where('id',$productId)->first();
-        return response()->json($product);
+        $matchingType = ProductMaster::where('type',$product->type)->get();
+        $brand = ProductMaster::where('type',$product->brand)->get();
+
+        return response()->json([
+            'product' => $product,
+            'brand' =>$brand,
+            'types' => $matchingType,
+        ]);
     }
 
     public function productIndex(Request $request, $productId)
     {
         /** @var ProductMaster $product */
         $product = ProductMaster::where('id',$productId)->first();
+        $matchingType = ProductMaster::where('type',$product->type)->get();
+        $brand = ProductMaster::where('type',$product->brand)->where('id',"!=",$product->id)->get();
+
 
         return view('product',[
-            'data' => $product
+            'product' => $product,
+            'brand' =>$brand,
+            'types' => $matchingType,
         ]);
     }
+
+
 }

@@ -59,6 +59,29 @@ class SearchController extends Controller
         ];
     }
 
+    public function querySearchFull(Request $request)
+    {
+        $query = $request->input('q');
+
+        if ($query == null) {
+            return [
+                'results' => false,
+                'suggests' => 'Search cannot be null'
+            ];
+        }
+
+        $response = $this->searchInterfaceService->querySearch($query);
+        if($response['hits'] == null || empty($response['hits'])) {
+            return [
+                'results' => false,
+            ];
+        }
+
+        return [
+            'results' => $response,
+        ];
+    }
+
     /**
      * @param $query
      * @return bool

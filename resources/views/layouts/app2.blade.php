@@ -27,7 +27,7 @@
     <header class="mb-5">
         <div class="navbar navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
-                <a href="#" class="navbar-brand">{{config('content.global.site_title')}}</a>
+                <a href="/" class="navbar-brand">{{config('content.global.site_title')}}</a>
             </div>
         </div>
     </header>
@@ -39,7 +39,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
 <script>
 
-  $('.carousel').carousel();
+
 //  let fp = '';
 //  new Fingerprint2().get(function(result, components){
 ////    fp = result; //a hash, representing your device fingerprint
