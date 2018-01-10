@@ -16,7 +16,7 @@
     if(isset($data))
     {
     @endphp
-        let productImages = {{$data['media']}};
+        {{--let productImages = {{$data['media']}};--}}
     @php
     }
     @endphp
@@ -38,6 +38,8 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
 <script>
+
+  $('.carousel').carousel();
 //  let fp = '';
 //  new Fingerprint2().get(function(result, components){
 ////    fp = result; //a hash, representing your device fingerprint

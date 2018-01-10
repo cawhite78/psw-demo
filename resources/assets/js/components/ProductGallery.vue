@@ -1,34 +1,34 @@
 <template>
-    <div>
-        <gallery :images="images" :index="index" @close="index = null"></gallery>
-        <div
-                class="image"
-                v-for="(image, imageIndex) in images"
-                :key="imageIndex"
-                @click="index = imageIndex"
-                :style="{ backgroundImage: 'url(' + image + ')', width: '300px', height: '200px' }"
-        ></div>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="..." alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="..." alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="..." alt="Third slide">
+        </div>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 </template>
 
 <script>
-  import VueGallery from 'vue-gallery';
-
   export default {
-    data: function () {
+    data() {
       return {
-        images: [
-          'https://dummyimage.com/800/ffffff/000000',
-          'https://dummyimage.com/1600/ffffff/000000',
-          'https://dummyimage.com/1280/000000/ffffff',
-          'https://dummyimage.com/400/000000/ffffff',
-        ],
-        index: null
-      };
-    },
+        stuff: ''
+      }
+    }
+  };
 
-    components: {
-      'gallery': VueGallery
-    },
-  }
 </script>
