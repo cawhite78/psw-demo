@@ -1,0 +1,75 @@
+$primaryblue: #3298C2 !important;
+
+.bg-dark {
+  background-color: $primaryblue;
+}
+
+.search-card {
+  border:1px solid #b9d8eb;
+  min-height:285px;
+  border-radius: 6px 6px 6px 6px;
+  -moz-border-radius: 6px 6px 6px 6px;
+  -webkit-border-radius: 6px 6px 6px 6px;
+  -webkit-box-shadow: 10px 10px 5px -10px rgba(158,155,158,1);
+  -moz-box-shadow: 10px 10px 5px -10px rgba(158,155,158,1);
+  box-shadow: 10px 10px 5px -10px rgba(158,155,158,1);
+
+  h3 {
+    font-size:124%;
+    color:$primaryblue;
+  }
+
+  .brand {
+    font-weight:bold;
+    font-size:70%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  p.description {
+    font-size:90%;
+  }
+
+  .highlight {
+    background-color: #f8ffac;
+  }
+
+  img {
+    width:200px;
+    height:auto;
+    float:right;
+  }
+
+  .btn-outline-primary {
+    color: $primaryblue;
+    background-color: transparent;
+    background-image: none;
+    border-color: $primaryblue;
+  }
+
+  .btn-outline-primary:hover {
+    color: #fff;
+    background-color: $primaryblue;
+    background-image: none;
+    border-color: $primaryblue;
+
+    a.product-button:hover {
+      color: #fff;
+      text-underline: none;
+    }
+  }
+
+  a.product-button {
+    color: $primaryblue;
+  }
+
+
+  a.more {
+    color: $primaryblue;
+  }
+
+  a.more:hover {
+    color: #333;
+  }
+}
+

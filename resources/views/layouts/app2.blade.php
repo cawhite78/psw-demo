@@ -18,7 +18,7 @@
     <header class="mb-5">
         <div class="navbar navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
-                <a href="#" class="navbar-brand">Album</a>
+                <a href="#" class="navbar-brand">{{config('content.global.site_title')}}</a>
             </div>
         </div>
     </header>

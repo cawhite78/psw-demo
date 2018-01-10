@@ -973,7 +973,7 @@ module.exports = __webpack_require__(42);
 __webpack_require__(11);
 window.Vue = __webpack_require__(35);
 window.axios = __webpack_require__(16);
-
+Vue.use('vue-truncate');
 Vue.component('autocomplete', __webpack_require__(38));
 
 new Vue({
@@ -42957,6 +42957,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -42968,6 +42984,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    highlight: function highlight(description) {
+      return description;
+      var text = this.q;
+
+      var index = description.indexOf(text);
+      if (index >= 0) {
+        var preRender = description.substring(0, index) + "<span class='highlight'>" + description.substring(index, index + text.length) + "</span>" + description.substring(index + text.length);
+      }
+      return description.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    },
     autoComplete: function autoComplete() {
       this.results = [];
       if (this.q.length > 2) {
@@ -42985,7 +43011,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.results = response.data.results;
         console.log(response.data.results);
         if (!_this.results) {
-          _this.getSpellCheck(_this.q);
+          //this.getSpellCheck(this.q);
         }
       });
     },
@@ -43018,7 +43044,7 @@ var render = function() {
             { name: "model", rawName: "v-model", value: _vm.q, expression: "q" }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", placeholder: "what are you looking for?" },
+          attrs: { type: "text", placeholder: " What are you looking for?" },
           domProps: { value: _vm.q },
           on: {
             keyup: _vm.autoComplete,
@@ -43064,34 +43090,88 @@ var render = function() {
       _c("div", { staticClass: "col-4" }),
       _vm._v(" "),
       _c("div", { staticClass: "col-4 text-right" }, [
-        _vm.results.length
+        _vm.results.length == 1
           ? _c("span", [_vm._v(_vm._s(_vm.results.length) + " result")])
-          : _c("span", [_vm._v("0 results")])
+          : _c("span", [_vm._v(_vm._s(_vm.results.length) + " results")])
       ])
     ]),
     _vm._v(" "),
     _vm.results.length
       ? _c(
           "div",
-          { staticClass: "row", staticStyle: { border: "1px solid blue" } },
+          { staticClass: "row" },
           _vm._l(_vm.results, function(result) {
             return _vm.results.length
-              ? _c("div", { staticClass: "col-lg-6 mb-4 mt-4 p-3" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "p2",
-                      staticStyle: { border: "1px solid black" }
-                    },
-                    [
-                      _c("h6", [_vm._v(_vm._s(result.brand))]),
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(result.name) +
-                          "\n            "
-                      )
-                    ]
-                  )
+              ? _c("div", { staticClass: "col-lg-6 mb-1 mt-2 p-3" }, [
+                  _c("div", { staticClass: "search-card p-3" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c("span", { staticClass: "brand" }, [
+                          _vm._v(_vm._s(result.brand))
+                        ]),
+                        _vm._v(" "),
+                        _c("h3", [_vm._v(_vm._s(result.name))])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("p", { staticClass: "description" }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.highlight(
+                                result.description
+                                  .split(" ")
+                                  .splice(0, 35)
+                                  .join(" ")
+                              )
+                            ) + " ... "
+                          ),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "more",
+                              attrs: { href: "/product/" + result.id }
+                            },
+                            [_vm._v("more")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-primary btn-sm",
+                            attrs: { type: "button" }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "product-button",
+                                attrs: { href: "/product/" + result.id }
+                              },
+                              [_vm._v("View product")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-6" }, [
+                        _c("img", {
+                          staticStyle: {
+                            width: "200px",
+                            height: "auto",
+                            float: "right"
+                          },
+                          attrs: {
+                            src:
+                              "http://edc.poolsupplyworld.com/wimages/product_image/" +
+                              result.primary_image
+                          }
+                        })
+                      ])
+                    ])
+                  ])
                 ])
               : _vm._e()
           })

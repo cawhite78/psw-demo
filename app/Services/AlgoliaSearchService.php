@@ -25,7 +25,7 @@ class AlgoliaSearchService implements SearchInterfaceService
 
         try {
             $res = $index->search($query, [
-                'attributesToRetrieve' => ['name', 'brand', 'media'],
+                'attributesToRetrieve' => ['id','name', 'brand', 'primary_image','description'],
                 'hitsPerPage' => 50,
             ]);
         } catch (AlgoliaException $exception) {
