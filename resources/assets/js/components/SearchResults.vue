@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-12">
-                <input type="text" placeholder=" What are you looking for?" v-model="q" v-on:keyup="autoComplete"
+                <input type="text" placeholder=" What are you looking for?" v-model="q" v-on:keyup="initGetSearch"
                        class="form-control">
             </div>
         </div>
@@ -10,8 +10,8 @@
         <div class="row mb-3">
             <div class="col-4 text-left">
                 <span v-if="q.length && !suggests.length">Search for <em>{{q}}</em></span>
-                <span v-else-if="q.length && suggests.length">Did you mean <em>{{ suggests }}</em>  <button
-                        v-on:click="suggestsClick();">Yes</button></span>
+                <!--<span v-else-if="q.length && suggests.length">Did you mean <em>{{ suggests }}</em>  <button-->
+                        <!--v-on:click="suggestsClick();">Yes</button></span>-->
             </div>
             <div class="col-4"></div>
             <div class="col-4 text-right">
@@ -67,7 +67,8 @@
         suggests: '',
         results: [],
         otherRecommendations: '',
-        dsmysql: dsmysql
+        dsmysql: dsmysql,
+        loading: false,
       }
     },
     methods: {
@@ -84,19 +85,24 @@
       },
       autoComplete() {
         this.results = [];
-        if (this.q.length > 2) {
+        if (this.q.length > 3) {
           this.getSearch();
         }
       },
+      initGetSearch() {
+        setTimeout(this.getSearch(), 500);
+      },
 
       getSearch() {
-        if(this.q.length > 2) {
+        this.loading = true;
+        if(this.q.length > 3) {
+          console.log('search is happening');
           let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
           axios.get(endpoint, {params: {q: this.q}}).then(response => {
             this.results = response.data.results;
-            console.log(response.data.results);
+            this.loading = false;
             if (!this.results) {
-              this.otherRecommendations = "You didn't find what you were looking for.  Would you like to browser our categories?";
+              this.otherRecommendations = "We were not able to find results for " . this.q;
               this.getSpellCheck(this.q);
             }
           });
@@ -106,7 +112,6 @@
         let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
         axios.get(endpoint, {params: {q: this.suggests}}).then(response => {
           this.results = response.data.results;
-          console.log(response.data.results);
           if (!this.results) {
             this.otherRecommendations = "You didn't find what you were looking for.  Would you like to browser our categories?";
             this.getSpellCheck(this.q);
