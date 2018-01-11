@@ -26,8 +26,12 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function search()
+    public function search(Request $request)
     {
+        $searchSource = $request->input('ds');
+        if(isset($searchSource)) {
+            return view('search',['ds' => $searchSource]);
+        }
         return view('search');
     }
 

@@ -16,8 +16,8 @@
             <div class="col-lg-8 col-md-12">
                 <h2>{{$product['name']}}</h2>
 
-                <p><strong>{{$product['brand']}}</strong></p>
-                <p><strong>{{$product['type']}}</strong></p>
+                <p><strong>Brand: {{$product['brand']}}</strong></p>
+                <p><strong>Category: {{$product['type']}}</strong></p>
                 <p>{{$product['description']}}</p>
 
                 <div class="row">
@@ -40,7 +40,7 @@
                         <h4>Other products by {{$product['brand']}}</h4>
                         <hr/>
                         @foreach($brand as $brandItem)
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-3">
                                     <img src="{{$brandItem['primary_image']}}" style="width:50px; height:auto"/>
                                 </div>

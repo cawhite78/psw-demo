@@ -73,3 +73,19 @@ $primaryblue: #3298C2 !important;
   }
 }
 
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  border:1px solid #efefef;
+  background:#fff;
+  padding:4px;
+}
+
+.search-card a.product-button {
+  color: #3298C2 !important;
+}
+
+.search-card a.product-button:hover {
+  color: #fff !important;
+  text-decoration: none;
+}

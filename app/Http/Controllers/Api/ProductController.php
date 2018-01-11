@@ -13,11 +13,11 @@ class ProductController extends Controller
     {
         $product = ProductMaster::where('id',$productId)->first();
         $matchingType = ProductMaster::where('type',$product->type)->get();
-        $brand = ProductMaster::where('type',$product->brand)->get();
+        $brand = ProductMaster::where('brand',$product->brand)->get();
 
         return response()->json([
             'product' => $product,
-            'brand' =>$brand,
+            'brand' =>$brand == null ? "No other products available for " . $product->brand : $brand,
             'types' => $matchingType,
         ]);
     }
@@ -26,8 +26,8 @@ class ProductController extends Controller
     {
         /** @var ProductMaster $product */
         $product = ProductMaster::where('id',$productId)->first();
-        $matchingType = ProductMaster::where('type',$product->type)->get();
-        $brand = ProductMaster::where('type',$product->brand)->where('id',"!=",$product->id)->get();
+        $matchingType =ProductMaster::where('type',$product->type)->where('id',"!=",$product->id)->get();
+        $brand = ProductMaster::where('brand',$product->brand)->where('id',"!=",$product->id)->get();
 
 
         return view('product',[

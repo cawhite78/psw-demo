@@ -24,13 +24,20 @@ Auth::routes();
 Route::get('/vue-search', function(){
     return view('vue-search');
 } );
+
+// presentation routes
 Route::get('/', 'HomeController@search')->name('home');
 Route::get('/search', 'HomeController@search')->name('search');
 Route::get('/product/{productId}', 'Api\ProductController@productIndex')->name('product');
 
 
+// API routes
 Route::get('api/search','Api\SearchController@querySearch');
-Route::get('api/search-full','Api\SearchController@querySearchFull');
+Route::get('api/search-mysql','Api\SearchController@querySearchMysql');
+
+
+
+
 
 Route::get('api/spelling','Api\SuggestsController@querySuggests');
 Route::get('api/spelling2','Api\SuggestsController@querySuggestsFromDom');

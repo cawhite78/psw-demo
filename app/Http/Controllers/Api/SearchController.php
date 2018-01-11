@@ -47,6 +47,7 @@ class SearchController extends Controller
             ];
         }
 
+
         $response = $this->searchInterfaceService->querySearch($query);
         if($response['hits'] == null || empty($response['hits'])) {
             return [
@@ -76,6 +77,24 @@ class SearchController extends Controller
                 'results' => false,
             ];
         }
+
+        return [
+            'results' => $response,
+        ];
+    }
+
+    public function querySearchMysql(Request $request)
+    {
+        $query = $request->input('q');
+
+        if ($query == null) {
+            return [
+                'results' => false,
+                'suggests' => 'Search cannot be null'
+            ];
+        }
+
+        $response = \DB::select('SELECT *, MATCH (`description`,`name`,`brand`,`type`) AGAINST (?) as score FROM products_master_fulltext WHERE MATCH (`description`,`name`,`brand`,`type`) AGAINST (?) > 0 ORDER BY score DESC;',[$query, $query]);
 
         return [
             'results' => $response,

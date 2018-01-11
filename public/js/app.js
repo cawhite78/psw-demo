@@ -57564,6 +57564,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -57571,7 +57572,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       q: '',
       suggests: '',
       results: [],
-      otherRecommendations: ''
+      otherRecommendations: '',
+      dsmysql: dsmysql
     };
   },
 
@@ -57600,7 +57602,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       if (this.q.length > 2) {
-        axios.get('/api/search', { params: { q: this.q } }).then(function (response) {
+        var endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
+        axios.get(endpoint, { params: { q: this.q } }).then(function (response) {
           _this.results = response.data.results;
           console.log(response.data.results);
           if (!_this.results) {
@@ -57756,7 +57759,13 @@ var render = function() {
                                 [_vm._v("View product")]
                               )
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          result.score
+                            ? _c("div", { staticClass: "m-3" }, [
+                                _vm._v("Score: " + _vm._s(result.score))
+                              ])
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-6" }, [

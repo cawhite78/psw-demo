@@ -40,6 +40,7 @@
                         <div class="col-6">
                             <p class="description">{{ highlight(result.description.split(" ").splice(0,25).join(" ")) }} ... <a class="more" v-bind:href="'/product/' + result.id">more</a></p>
                             <button  type="button" class="btn btn-outline-primary btn-sm"><a class="product-button" v-bind:href="'/product/' + result.id">View product</a></button>
+                            <div v-if="result.score" class="m-3">Score: {{result.score}}</div>
 
                         </div>
                         <div class="col-6">
@@ -65,7 +66,8 @@
         q: '',
         suggests: '',
         results: [],
-        otherRecommendations: ''
+        otherRecommendations: '',
+        dsmysql: dsmysql
       }
     },
     methods: {
@@ -92,7 +94,8 @@
       },
       getSearch() {
         if(this.q.length > 2) {
-          axios.get('/api/search', {params: {q: this.q}}).then(response => {
+          let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
+          axios.get(endpoint, {params: {q: this.q}}).then(response => {
             this.results = response.data.results;
             console.log(response.data.results);
             if (!this.results) {

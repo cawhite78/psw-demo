@@ -11,16 +11,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script>
-    @php
-    if(isset($data))
-    {
-    @endphp
-        {{--let productImages = {{$data['media']}};--}}
-    @php
-    }
-    @endphp
-    </script>
+
+    @if(isset($ds) && $ds == 1)
+<script> var dsmysql = 1; </script>
+@else
+<script> var dsmysql = 0; </script>
+@endif
+
 </head>
 <body>
 <div id="app">
