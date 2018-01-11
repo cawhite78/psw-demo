@@ -11,7 +11,7 @@
             <div class="col-4 text-left">
                 <span v-if="q.length && !suggests.length">Search for <em>{{q}}</em></span>
                 <span v-else-if="q.length && suggests.length">Did you mean <em>{{ suggests }}</em>  <button
-                        v-on:click="q=suggests; suggestsClick();">Yes</button></span>
+                        v-on:click="suggestsClick();">Yes</button></span>
             </div>
             <div class="col-4"></div>
             <div class="col-4 text-right">
@@ -88,10 +88,7 @@
           this.getSearch();
         }
       },
-      suggestsClick() {
-        this.q = this.suggests;
-        this.getSearch();
-      },
+
       getSearch() {
         if(this.q.length > 2) {
           let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
@@ -100,16 +97,26 @@
             console.log(response.data.results);
             if (!this.results) {
               this.otherRecommendations = "You didn't find what you were looking for.  Would you like to browser our categories?";
-//              this.getSpellCheck(this.q);
+              this.getSpellCheck(this.q);
             }
           });
         }
+      },
+      suggestsClick() {
+        let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
+        axios.get(endpoint, {params: {q: this.suggests}}).then(response => {
+          this.results = response.data.results;
+          console.log(response.data.results);
+          if (!this.results) {
+            this.otherRecommendations = "You didn't find what you were looking for.  Would you like to browser our categories?";
+            this.getSpellCheck(this.q);
+          }
+        });
       },
 
       getSpellCheck() {
         axios.get('/api/spelling2', {params: {q: this.q}}).then(response => {
           this.suggests = response.data.results;
-//          this.results = null;
           console.log(response.data.results);
         });
       }

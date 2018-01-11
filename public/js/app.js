@@ -57594,10 +57594,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.getSearch();
       }
     },
-    suggestsClick: function suggestsClick() {
-      this.q = this.suggests;
-      this.getSearch();
-    },
     getSearch: function getSearch() {
       var _this = this;
 
@@ -57608,17 +57604,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           console.log(response.data.results);
           if (!_this.results) {
             _this.otherRecommendations = "You didn't find what you were looking for.  Would you like to browser our categories?";
-            //              this.getSpellCheck(this.q);
+            _this.getSpellCheck(_this.q);
           }
         });
       }
     },
-    getSpellCheck: function getSpellCheck() {
+    suggestsClick: function suggestsClick() {
       var _this2 = this;
 
+      var endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
+      axios.get(endpoint, { params: { q: this.suggests } }).then(function (response) {
+        _this2.results = response.data.results;
+        console.log(response.data.results);
+        if (!_this2.results) {
+          _this2.otherRecommendations = "You didn't find what you were looking for.  Would you like to browser our categories?";
+          _this2.getSpellCheck(_this2.q);
+        }
+      });
+    },
+    getSpellCheck: function getSpellCheck() {
+      var _this3 = this;
+
       axios.get('/api/spelling2', { params: { q: this.q } }).then(function (response) {
-        _this2.suggests = response.data.results;
-        //          this.results = null;
+        _this3.suggests = response.data.results;
         console.log(response.data.results);
       });
     }
@@ -57673,7 +57681,6 @@ var render = function() {
                   {
                     on: {
                       click: function($event) {
-                        _vm.q = _vm.suggests
                         _vm.suggestsClick()
                       }
                     }
