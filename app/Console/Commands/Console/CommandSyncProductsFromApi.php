@@ -47,7 +47,7 @@ class CommandSyncProductsFromApi extends Command
         $result = $this->syncProductDataFromApiService->sync();
 
         if($result) {
-            $this->call('scout:import "App\Models\ProductMaster"');
+            $this->call('scout:import' ,['model' => "App\Models\ProductMaster"]);
         }
 
     }

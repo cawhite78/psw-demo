@@ -17,7 +17,7 @@ class ProductMaster extends Model
     /**
      * @var string
      */
-    protected $table = 'products_master';
+    protected $table = 'products_master_fulltext';
     protected $guarded = [];
     protected $hidden = [];
     /**
