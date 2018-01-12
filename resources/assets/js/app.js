@@ -1,6 +1,7 @@
 require('./bootstrap');
 window.Vue = require('vue');
 window.axios = require('axios');
+window.collection = require('collect.js');
 
 Vue.component('search-results',require('./components/SearchResults.vue'));
 //Vue.component('product-gallery', require('./components/ProductGallery.vue'));

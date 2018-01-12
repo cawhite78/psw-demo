@@ -7,7 +7,7 @@
             </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" style="min-height:30px;">
             <div class="col-4 text-left">
                 <span v-if="q.length && !suggests.length">Search for <em>{{q}}</em></span>
                 <!--<span v-else-if="q.length && suggests.length">Did you mean <em>{{ suggests }}</em>  <button-->
@@ -22,12 +22,19 @@
             </div>
         </div>
 
-        <div v-if="results.length && q.length > 2" class="row">
-            <div class="col-9">
 
-
+        <div class="row" v-if = "q.length > 2 && results.length">
+            <div class="col-12">
+                <div v-if="brands.length > 1">
+                <button v-on:click="filterByBrand('')">all</button>
+                <span  v-for="brand in brands">
+                    <button class="btn btn-outline-primary" v-on:click="filterByBrand(brand)">{{brand}}</button>
+                </span>
+                </div>
             </div>
+        </div>
 
+        <div v-if="results.length && q.length > 2" class="row">
             <div class="col-lg-6 mb-1 mt-2 p-3" v-if="results.length " v-for="result in results">
                 <div class="search-card p-3">
                     <div class="row">
@@ -68,11 +75,15 @@
     data() {
       return {
         q: '',
+        b: '',
+        t: '',
         suggests: '',
         results: [],
         otherRecommendations: '',
         dsmysql: dsmysql,
         loading: false,
+        filters: [],
+        endpoint: this.dsmysql ? '/api/search-mysql' : '/api/search',
       }
     },
     methods: {
@@ -98,12 +109,13 @@
       },
 
       getSearch() {
-        this.loading = true;
-        console.log('search is happening');
-        let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
-        axios.get(endpoint, {params: {q: this.q}}).then(response => {
+        axios.get(this.endpoint, {params: {
+          q: this.q,
+          b: this.b,
+          t: this.t
+        }}).then(response => {
           this.results = response.data.results;
-          this.loading = false;
+          this.brands = response.data.brands;
           if (!this.results) {
             this.otherRecommendations = "We were not able to find results for ".this.q;
             this.getSpellCheck(this.q);
@@ -121,11 +133,30 @@
           }
         });
       },
+      sortByBrand(brand) {
+        axios.get(this.endpoint, {params: {
+          q: this.q,
+          b: brand,
+        }}).then(response => {
+          this.results = response.data.results;
 
+          if (!this.results) {
+            this.otherRecommendations = "We were not able to find results for ".this.q;
+            this.getSpellCheck(this.q);
+          }
+        });
+
+      },
+      say(message) {
+        alert(message)
+      },
+      filterByBrand(brand) {
+        this.brand = brand;
+        this.sortByBrand(brand);
+      },
       getSpellCheck() {
         axios.get('/api/spelling2', {params: {q: this.q}}).then(response => {
           this.suggests = response.data.results;
-          console.log(response.data.results);
         });
       }
     }

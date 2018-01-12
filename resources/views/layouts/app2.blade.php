@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<div id="app">
+<div>
     <header class="mb-5">
         <div class="navbar navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">

@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "collect.js": "^4.0.2",
         "fingerprintjs2": "^1.5.1",
         "vue-carousel": "^0.6.5",
         "vue-gallery": "^1.2.5",

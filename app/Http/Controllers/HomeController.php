@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductMaster;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,7 +33,15 @@ class HomeController extends Controller
         if(isset($searchSource)) {
             return view('search',['ds' => $searchSource]);
         }
-        return view('search');
+
+        $brands = ProductMaster::select('brand')->groupBy('brand')->get();
+        $categories = ProductMaster::select('type')->groupBy('type')->get();
+
+        return view('search',
+            [
+                'brands' => $brands,
+                'categories' => $categories
+            ]);
     }
 
     public function vueSearch()

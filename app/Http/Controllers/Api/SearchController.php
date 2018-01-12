@@ -39,6 +39,8 @@ class SearchController extends Controller
     public function querySearch(Request $request)
     {
         $query = $request->input('q');
+        $brand = $request->input('b');
+
 
         if ($query == null) {
             return [
@@ -47,17 +49,35 @@ class SearchController extends Controller
             ];
         }
 
+        $query = $brand !== null ? $query . ' ' . $brand : $query;
+        $response = $this->searchInterfaceService->querySearch(urlencode($query));
 
-        $response = $this->searchInterfaceService->querySearch($query);
+
         if($response['hits'] == null || empty($response['hits'])) {
             return [
                 'results' => false,
             ];
         }
 
-        return [
+
+        $collection = collect($response['hits'])->forget('objectID');
+
+        $brands = $collection->mapToGroups(function ($item, $key) {
+            return [$item['brand']];
+        })->flatten(2)->unique()->flatten(2);
+
+        //$types = $collection->mapToGroups(function ($item, $key) {
+        //    return [$item['type']];
+        //})->flatten(2)->unique()->flatten(2);
+
+        $returnData = [
+            'brands' =>  $brands,
+            //'types' => $types,
             'results' => $response['hits'],
         ];
+
+        return response()->json($returnData);
+
     }
 
     public function querySearchFull(Request $request)
