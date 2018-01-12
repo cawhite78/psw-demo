@@ -11,7 +11,7 @@
             <div class="col-4 text-left">
                 <span v-if="q.length && !suggests.length">Search for <em>{{q}}</em></span>
                 <!--<span v-else-if="q.length && suggests.length">Did you mean <em>{{ suggests }}</em>  <button-->
-                        <!--v-on:click="suggestsClick();">Yes</button></span>-->
+                <!--v-on:click="suggestsClick();">Yes</button></span>-->
             </div>
             <div class="col-4"></div>
             <div class="col-4 text-right">
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div v-if="results.length" class="row">
+        <div v-if="results.length && q.length > 2" class="row">
             <div class="col-9">
 
 
@@ -38,8 +38,11 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <p class="description">{{ highlight(result.description.split(" ").splice(0,25).join(" ")) }} ... <a class="more" v-bind:href="'/product/' + result.id">more</a></p>
-                            <button  type="button" class="btn btn-outline-primary btn-sm"><a class="product-button" v-bind:href="'/product/' + result.id">View product</a></button>
+                            <p class="description">{{ highlight(result.description.split(" ").splice(0,25).join(" ")) }}
+                                ... <a class="more" v-bind:href="'/product/' + result.id">more</a></p>
+                            <button type="button" class="btn btn-outline-primary btn-sm"><a class="product-button"
+                                                                                            v-bind:href="'/product/' + result.id">View
+                                product</a></button>
                             <div v-if="result.score" class="m-3">Score: {{result.score}}</div>
 
                         </div>
@@ -50,7 +53,8 @@
                         </div>
                     </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
         <div v-else>
             <div v-if="q.length">
                 {{otherRecommendations}}
@@ -81,11 +85,11 @@
           return description.substring(0, index) + "<span class='highlight'>" + description.substring(
             index, index + text.length) + "</span>" + description.substring(index + text.length);
         }
-        return description.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        return description.replace(/</g, "&lt;").replace(/>/g, "&gt;");
       },
       autoComplete() {
         this.results = [];
-        if (this.q.length > 3) {
+        if (this.q.length > 2) {
           this.getSearch();
         }
       },
@@ -95,18 +99,17 @@
 
       getSearch() {
         this.loading = true;
-        if(this.q.length > 3) {
-          console.log('search is happening');
-          let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
-          axios.get(endpoint, {params: {q: this.q}}).then(response => {
-            this.results = response.data.results;
-            this.loading = false;
-            if (!this.results) {
-              this.otherRecommendations = "We were not able to find results for " . this.q;
-              this.getSpellCheck(this.q);
-            }
-          });
-        }
+        console.log('search is happening');
+        let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
+        axios.get(endpoint, {params: {q: this.q}}).then(response => {
+          this.results = response.data.results;
+          this.loading = false;
+          if (!this.results) {
+            this.otherRecommendations = "We were not able to find results for ".this.q;
+            this.getSpellCheck(this.q);
+          }
+        });
+
       },
       suggestsClick() {
         let endpoint = this.dsmysql ? '/api/search-mysql' : '/api/search';
