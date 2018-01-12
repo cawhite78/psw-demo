@@ -57577,6 +57577,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -57613,6 +57620,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     initGetSearch: function initGetSearch() {
       setTimeout(this.getSearch(), 500);
+
+      if (this.q.length > 2) {
+        $('.content-area').hide();
+      } else {
+        $('.content-area').show();
+      }
     },
     getSearch: function getSearch() {
       var _this = this;
@@ -57625,6 +57638,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.results = response.data.results;
         _this.brands = response.data.brands;
         if (!_this.results) {
+          $('.content-area').show();
           _this.otherRecommendations = "We were not able to find results for ".this.q;
           _this.getSpellCheck(_this.q);
         }
@@ -57656,9 +57670,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this3.getSpellCheck(_this3.q);
         }
       });
-    },
-    say: function say(message) {
-      alert(message);
     },
     filterByBrand: function filterByBrand(brand) {
       this.brand = brand;
@@ -57746,6 +57757,7 @@ var render = function() {
                     _c(
                       "button",
                       {
+                        staticClass: "btn btn-sm btn-outline-primary mr-2",
                         on: {
                           click: function($event) {
                             _vm.filterByBrand("")
@@ -57760,7 +57772,7 @@ var render = function() {
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-outline-primary",
+                            staticClass: "btn btn-sm btn-outline-primary mr-2",
                             on: {
                               click: function($event) {
                                 _vm.filterByBrand(brand)
@@ -57782,7 +57794,7 @@ var render = function() {
     _vm.results.length && _vm.q.length > 2
       ? _c(
           "div",
-          { staticClass: "row" },
+          { staticClass: "row search-container" },
           _vm._l(_vm.results, function(result) {
             return _vm.results.length
               ? _c("div", { staticClass: "col-lg-6 mb-1 mt-2 p-3" }, [
@@ -57793,7 +57805,19 @@ var render = function() {
                           _vm._v(_vm._s(result.brand))
                         ]),
                         _vm._v(" "),
-                        _c("h3", [_vm._v(_vm._s(result.name))])
+                        _c("h3", [_vm._v(_vm._s(result.name))]),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            class: [
+                              "category-" + result.type,
+                              "product-category",
+                              "rounded-1"
+                            ]
+                          },
+                          [_vm._v(_vm._s(result.type))]
+                        )
                       ])
                     ]),
                     _vm._v(" "),

@@ -36,11 +36,12 @@ class HomeController extends Controller
 
         $brands = ProductMaster::select('brand')->groupBy('brand')->get();
         $categories = ProductMaster::select('type')->groupBy('type')->get();
-
+        $featured = ProductMaster::select('name','description','primary_image')->limit(3)->get();
         return view('search',
             [
                 'brands' => $brands,
-                'categories' => $categories
+                'categories' => $categories,
+                'featured' => $featured
             ]);
     }
 
