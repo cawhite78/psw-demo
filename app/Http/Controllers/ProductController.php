@@ -31,4 +31,10 @@ class ProductController extends Controller
             'types' => $matchingType,
         ]);
     }
+
+    public function productsAll()
+    {
+        return view('products-all');
+    }
+
 }

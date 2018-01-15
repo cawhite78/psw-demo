@@ -22,27 +22,13 @@ class ProductController extends Controller
         ]);
     }
 
-    public function productIndex(Request $request, $productId)
-    {
-        /** @var ProductMaster $product */
-        $product = ProductMaster::where('id',$productId)->first();
-        $matchingType =ProductMaster::where('type',$product->type)->where('id',"!=",$product->id)->get();
-        $brand = ProductMaster::where('brand',$product->brand)->where('id',"!=",$product->id)->get();
-
-
-        return view('product',[
-            'product' => $product,
-            'brand' =>$brand,
-            'types' => $matchingType,
-        ]);
-    }
 
     public function getAllProducts()
     {
         $products = ProductMaster::select('id','name','description','primary_image','type','brand')->get();
-        return view('products-all', [
-            'products' => $products->toArray()
-        ]);
+        return response()->json([
+            'results' =>$products]
+        );
     }
 
 

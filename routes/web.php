@@ -31,7 +31,7 @@ Route::get('/search', 'HomeController@search')->name('search');
 
 // Products
 Route::get('/product/{productId}', 'ProductController@productIndex')->name('product');
-Route::get('/products', 'Api\ProductController@getAllProducts')->name('products-all');
+Route::get('/products', 'ProductController@productsAll')->name('products-all');
 
 // API routes
 Route::get('api/search','Api\SearchController@querySearch');
@@ -39,5 +39,6 @@ Route::get('api/search-mysql','Api\SearchController@querySearchMysql');
 Route::get('api/spelling','Api\SuggestsController@querySuggests');
 Route::get('api/spelling2','Api\SuggestsController@querySuggestsFromDom');
 Route::get('api/product/{productId}','Api\ProductController@getProduct');
+Route::get('api/products','Api\ProductController@getAllProducts');
 
 
