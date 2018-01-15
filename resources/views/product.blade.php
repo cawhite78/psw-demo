@@ -21,35 +21,41 @@
                 <p>{{$product['description']}}</p>
 
                 <div class="row">
-                    <div class="col-6">
-                        <h4>Others viewed for type "{{$product['type']}}"</h4>
-                        <hr/>
-                        @foreach($types->shuffle() as $typeItem)
-                            <div class="row mb-3">
-                                <div class="col-3">
-                                    <img src="{{$typeItem['primary_image']}}" style="width:50px; height:auto"/>
+                    @if(count($types) > 0)
+                        <div class="col-6">
+                            <h4>Others viewed for type "{{$product['type']}}"</h4>
+                            <hr/>
+                            @foreach($types->shuffle() as $typeItem)
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <img src="{{$typeItem['primary_image']}}" style="width:50px; height:auto"/>
+                                    </div>
+                                    <div class="col-9">
+                                        {{$typeItem['name']}}
+                                        <div class="text-right"><a href="/product/{{$typeItem['id']}}">view item</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-9">
-                                    {{$typeItem['name']}}
-                                    <div class="text-right"><a href="/product/{{$typeItem['id']}}">view item</a></div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(count($brand) > 0)
+                        <div class="col-6">
+                            <h4>Other products by {{$product['brand']}}</h4>
+                            <hr/>
+                            @foreach($brand as $brandItem)
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <img src="{{$brandItem['primary_image']}}" style="width:50px; height:auto"/>
+                                    </div>
+                                    <div class="col-9">
+                                        {{$brandItem['name']}}
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="col-6">
-                        <h4>Other products by {{$product['brand']}}</h4>
-                        <hr/>
-                        @foreach($brand as $brandItem)
-                            <div class="row mb-3">
-                                <div class="col-3">
-                                    <img src="{{$brandItem['primary_image']}}" style="width:50px; height:auto"/>
-                                </div>
-                                <div class="col-9">
-                                    {{$brandItem['name']}}
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
             </div>

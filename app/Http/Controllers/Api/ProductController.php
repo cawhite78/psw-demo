@@ -37,5 +37,13 @@ class ProductController extends Controller
         ]);
     }
 
+    public function getAllProducts()
+    {
+        $products = ProductMaster::select('id','name','description','primary_image','type','brand')->get();
+        return view('products-all', [
+            'products' => $products->toArray()
+        ]);
+    }
+
 
 }
