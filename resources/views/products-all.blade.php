@@ -7,7 +7,7 @@
                 <div class="toolbar mb2 mt2">
                     <button id="button-all" class="btn btn-sm btn-outline-primary fil-cat" data-rel="all">All</button>
                     @foreach($categories->toArray() as $category)
-                        <button id="button-{{$category['type']}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}</button>
+                        <button id="button-{{str_replace(' ', '-',$category['type'])}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}</button>
                     @endforeach
                 </div>
 
@@ -21,6 +21,7 @@
                                     <td style="width:200px;"><img  style="width:80%; height:auto; float:left;" src="{{$product['primary_image']}}" alt="{{$product['name']}}" /></td>
                                     <td>
                                         <h3>{{$product['name']}}</h3>
+                                        <span class="category-{{$product['type']}} product-category rounded-1">{{$product['type']}}</span><br/>
                                         {{truncateContent($product['description'],100,'.')}}  <a class="product-button"
                                                                                                     href="/product/{{$product['id']}}">Read
                                                     more</a>

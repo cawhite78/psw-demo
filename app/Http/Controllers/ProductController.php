@@ -48,7 +48,7 @@ class ProductController extends Controller
 
     public function productsAll(Request $request)
     {
-        $productParam = $request->input('p');
+        $productParam = $request->input('type');
         $brands = ProductMaster::select('brand')->groupBy('brand')->get();
         $categories = ProductMaster::select('type')->groupBy('type')->get();
         $featured = ProductMaster::select('id','name','description','primary_image','brand','type')->get();

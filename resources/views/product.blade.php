@@ -11,13 +11,13 @@
     @php
         $images = json_decode($product['images'],1);
     @endphp
-    <div class="container">
+    <div class="container" id="app">
         <div class="row">
             <div class="col-lg-8 col-md-12">
                 <h2>{{$product['name']}}</h2>
 
-                <p><strong>Brand: {{$product['brand']}}</strong></p>
-                <p><strong>Category: {{$product['type']}}</strong></p>
+                <strong>Brand: {{$product['brand']}}</strong><br/>
+                <span class="category-{{$product['type']}} product-category rounded-1"><a href="/products?type={{str_replace(' ','-', $product['type'])}}">{{$product['type']}}</a></span><br/>
                 <p>{{$product['description']}}</p>
 
                 <div class="row">

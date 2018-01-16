@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mb-5">
+        <div class="row mb-3">
             <div class="col-md-12">
                 <input type="text" placeholder=" What are you looking for?" v-model="q" v-on:keyup="initGetSearch"
                        class="form-control">

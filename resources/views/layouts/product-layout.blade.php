@@ -33,18 +33,24 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 <script>
 
   $(function() {
-    $("#button-{{$productParam}}").addClass('active');
+    var fromParam = $("#button-{{$productParam}}");
+    var fromParamSelected = fromParam.attr("data-rel");
+    $("#portfolio div").not("."+fromParamSelected).fadeOut().removeClass('scale-anm');
+    fromParam.addClass('active');
+
+
     var selectedClass = "";
     $(".fil-cat").click(function(){
       selectedClass = $(this).attr("data-rel");
       $("#portfolio").fadeTo(100, 0.1);
       $("#portfolio div").not("."+selectedClass).fadeOut().removeClass('scale-anm');
       $("#button-{{$productParam}}").removeClass('active');
+
       setTimeout(function() {
         $("."+selectedClass).fadeIn().addClass('scale-anm');
         $("#portfolio").fadeTo(300, 1);
