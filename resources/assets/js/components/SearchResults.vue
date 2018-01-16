@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-8">
                             <p class="description">{{ highlight(result.description.split(" ").splice(0,25).join(" ")) }}
                                 ... <a class="more" v-bind:href="'/product/' + result.id">more</a>
 
@@ -59,7 +59,7 @@
                             <div v-if="result.score" class="m-3">Score: {{result.score}}</div>
 
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
 
                             <img v-bind:src="result.primary_image"
                                  style="width:200px; height:auto; float:right;">
