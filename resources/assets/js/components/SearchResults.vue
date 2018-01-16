@@ -41,7 +41,7 @@
                         <div class="col-12">
                             <span class="brand">{{ result.brand }}</span>
                             <h3>{{ result.name }}</h3>
-                            <span :class="['category-' + result.type, 'product-category', 'rounded-1']">{{result.type}}</span>
+                            <span :class="['category-' + result.type, 'product-category', 'rounded-1']"><a v-bind:href="'/products?type=' + result.type.replace(' ', '-')">{{result.type}}</a></span>
                         </div>
                     </div>
                     <div class="row">

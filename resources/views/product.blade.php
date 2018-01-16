@@ -23,9 +23,18 @@
                 <div class="row">
                     @if(count($types) > 0)
                         <div class="col-6 pr-4">
-                            <h4>Others viewed for type "{{$product['type']}}"</h4>
+                            <h4>Others viewed for type <a style="font-weight: bold; text-decoration: underline" href="/products?type={{str_replace(' ', '-',$product['type'])}}">{{$product['type']}}</a></h4>
                             <hr/>
+                            @php
+                                $i = 0;
+                            @endphp
                             @foreach($types->shuffle() as $typeItem)
+                                @php
+                                    if($i > 2) {
+                                        continue;
+                                    }
+                                @endphp
+
                                 <div class="row mb-3 pb-4" style="border-bottom:1px solid #efefef; min-height:135px;">
                                     <div class="col-2">
                                         <img src="{{$typeItem['primary_image']}}" style="width:50px; height:auto"/>
@@ -36,6 +45,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @php
+                                    $i++
+                                @endphp
                             @endforeach
                         </div>
                     @endif
