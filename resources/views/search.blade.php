@@ -16,17 +16,32 @@
 
                 <div class="home-featured p-4">
                     <h3>Featured Products</h3>
-                    <div class="mb-4 mt-4">
-                    @foreach($featured as $product)
-                        <h4>{{$product['name']}}</h4>
-                        <div class="row mb-5">
+                    <div class="mb-4 mt-4" >
+                        @php
+                            $i = 0;
+                        @endphp
+                    @foreach($featured->shuffle() as $product)
+                        @php
+                            if($i > 2) {
+                                continue;
+                            }
+                        @endphp
+                        <div class="row mb-5 pb-3" style="border-bottom:1px solid #efefef;">
                             <div class="col-2">
                                 <img src="{{$product['primary_image']}}" width="100%"/>
                             </div>
                             <div class="col-10">
+                                <h4>{{$product['name']}}</h4>
                                 <p>{{truncateContent($product['description'] ,100, '.', ' ...')}}</p>
+                                <a class="product-button"
+                                   href="/product/{{$product['id']}}"><button type="button" class="btn btn-outline-primary btn-sm float-right">View
+                                        product</button></a>
                             </div>
                         </div>
+                        @php
+                        $i++
+                        @endphp
+
                     @endforeach
                     </div>
                 </div>
