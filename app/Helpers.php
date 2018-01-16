@@ -1,8 +1,10 @@
 <?php
 
 // truncate string at word
-function truncateContent($string, $limit, $break = ".", $pad = "...")
+function truncateContent($string, $limit, $break = ".", $pad = " ...")
 {
+
+    $limit = $limit == null ? 35 : $limit;
 
     if (strlen($string) <= $limit) {
         return $string;

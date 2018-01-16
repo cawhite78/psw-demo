@@ -6,7 +6,7 @@
             'types' => $matchingType,
         ]
     --}}
-@extends('layouts.app2')
+@extends('layouts.main-layout')
 @section('content')
     @php
         $images = json_decode($product['images'],1);

@@ -34,13 +34,23 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
 <script>
+  $(function() {
+    var selectedClass = "";
+    $(".fil-cat").click(function(){
+      selectedClass = $(this).attr("data-rel");
+      $("#portfolio").fadeTo(100, 0.1);
+      $("#portfolio div").not("."+selectedClass).fadeOut().removeClass('scale-anm');
+      setTimeout(function() {
+        $("."+selectedClass).fadeIn().addClass('scale-anm');
+        $("#portfolio").fadeTo(300, 1);
+      }, 300);
 
+    });
+  });
 
-//  let fp = '';
-//  new Fingerprint2().get(function(result, components){
-////    fp = result; //a hash, representing your device fingerprint
-//  });
 </script>
 </body>
 </html>

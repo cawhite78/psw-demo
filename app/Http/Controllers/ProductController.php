@@ -32,9 +32,31 @@ class ProductController extends Controller
         ]);
     }
 
-    public function productsAll()
+    public function productsAllFormer(Request $request)
     {
-        return view('products-all');
+        $type = $request->input('t');
+        $brand = $request->input('b');
+
+        return view('products-all',
+            [
+                'type' => isset($type) && $type !== null ? $type : 0,
+                'brand' => isset($brand) && $brand !== null ? $brand: 0
+            ]
+        );
+    }
+
+
+    public function productsAll(Request $request)
+    {
+        $brands = ProductMaster::select('brand')->groupBy('brand')->get();
+        $categories = ProductMaster::select('type')->groupBy('type')->get();
+        $featured = ProductMaster::select('id','name','description','primary_image','brand','type')->get();
+        return view('products-all',
+            [
+                'brands' => $brands,
+                'categories' => $categories,
+                'featured' => $featured,
+        ]);
     }
 
 }

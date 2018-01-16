@@ -9,3 +9,4 @@ Vue.component('products-all',require('./components/ProductsAll.vue'));
 new Vue({
   el: '#app'
 });
+

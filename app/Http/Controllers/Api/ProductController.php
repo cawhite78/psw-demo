@@ -23,9 +23,12 @@ class ProductController extends Controller
     }
 
 
-    public function getAllProducts()
+    public function getAllProducts(Request $request)
     {
-        $products = ProductMaster::select('id','name','description','primary_image','type','brand')->get();
+        $b = $request->input('b');
+        $t = $request->input('t');
+
+        $products = ProductMaster::select('id','name','description','primary_image','type','brand')->orderBy('name','ASC')->get();
         return response()->json([
             'results' =>$products]
         );

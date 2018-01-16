@@ -41,7 +41,7 @@ class HomeController extends Controller
             [
                 'brands' => $brands,
                 'categories' => $categories,
-                'featured' => $featured
+                'featured' => $featured,
             ]);
     }
 
