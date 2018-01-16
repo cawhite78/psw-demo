@@ -22,15 +22,15 @@
 
                 <div class="row">
                     @if(count($types) > 0)
-                        <div class="col-6">
+                        <div class="col-6 pr-4">
                             <h4>Others viewed for type "{{$product['type']}}"</h4>
                             <hr/>
                             @foreach($types->shuffle() as $typeItem)
-                                <div class="row mb-3">
-                                    <div class="col-3">
+                                <div class="row mb-3 pb-4" style="border-bottom:1px solid #efefef; min-height:135px;">
+                                    <div class="col-2">
                                         <img src="{{$typeItem['primary_image']}}" style="width:50px; height:auto"/>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-10">
                                         {{$typeItem['name']}}
                                         <div class="text-right"><a href="/product/{{$typeItem['id']}}">view item</a>
                                         </div>
@@ -41,16 +41,18 @@
                     @endif
 
                     @if(count($brand) > 0)
-                        <div class="col-6">
+                        <div class="col-6 pl-4">
                             <h4>Other products by {{$product['brand']}}</h4>
                             <hr/>
                             @foreach($brand as $brandItem)
-                                <div class="row mb-3">
-                                    <div class="col-3">
+                                <div class="row mb-3 pb-4" style="border-bottom:1px solid #efefef; min-height:135px;">
+                                    <div class="col-2">
                                         <img src="{{$brandItem['primary_image']}}" style="width:50px; height:auto"/>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-10">
                                         {{$brandItem['name']}}
+                                        <div class="text-right"><a href="/product/{{$brandItem['id']}}">view item</a>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
