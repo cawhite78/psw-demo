@@ -3,12 +3,11 @@
     <div class="container" id="app">
         <div class="row">
             <div class="col-12" id="app">
-                {{--<products-all></products-all>--}}
 
                 <div class="toolbar mb2 mt2">
-                    <button class="btn fil-cat" href="" data-rel="all">All</button>
+                    <button id="button-all" class="btn btn-sm btn-outline-primary fil-cat" data-rel="all">All</button>
                     @foreach($categories->toArray() as $category)
-                        <button class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}</button>
+                        <button id="button-{{$category['type']}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}</button>
                     @endforeach
                 </div>
 

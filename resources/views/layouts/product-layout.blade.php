@@ -36,15 +36,25 @@
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 <script>
+
   $(function() {
+    $("#button-{{$productParam}}").addClass('active');
     var selectedClass = "";
     $(".fil-cat").click(function(){
       selectedClass = $(this).attr("data-rel");
       $("#portfolio").fadeTo(100, 0.1);
       $("#portfolio div").not("."+selectedClass).fadeOut().removeClass('scale-anm');
+      $("#button-{{$productParam}}").removeClass('active');
       setTimeout(function() {
         $("."+selectedClass).fadeIn().addClass('scale-anm');
         $("#portfolio").fadeTo(300, 1);
+
+        $(".toolbar button").on('click', function(){
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+        })
+
       }, 300);
 
     });

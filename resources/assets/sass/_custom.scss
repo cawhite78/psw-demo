@@ -219,6 +219,10 @@ p:hover {
   box-shadow: 0 0 0 3px var(--darken-3);
 }
 
+.btn-outline-primary:not([disabled]):not(.disabled).active {
+  color:#fff;
+}
+
 ::-moz-focus-inner {
   border: 0;
   padding: 0;
