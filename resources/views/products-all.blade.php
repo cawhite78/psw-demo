@@ -16,8 +16,8 @@
 
                 <div id="portfolio">
                     @foreach($featured->toArray() as $product)
-                        <div class="row mb-3 mt-3 tile scale-anm {{str_replace(' ', '-',$product['type'])}} all">
-                            <table class="table">
+                        <div style="border-bottom:1px solid #efefef;" class="row pb-3 mb-3 mt-3 tile scale-anm {{str_replace(' ', '-',$product['type'])}} all">
+                            <table class="">
                                 <tr>
                                     <td style="width:200px;"><img  style="width:80%; height:auto; float:left;" src="{{$product['primary_image']}}" alt="{{$product['name']}}" /></td>
                                     <td>
@@ -25,10 +25,10 @@
                                         {{truncateContent($product['description'],100,'.')}}  <a class="product-button"
                                                                                                     href="/product/{{$product['id']}}">Read
                                                     more</a>
-                                        <div clas="mt-5">
-                                        <a class="product-button"
+
+                                        <p><a class="product-button"
                                            href="/product/{{$product['id']}}"><button type="button" class="btn btn-outline-primary btn-sm float-right">View
-                                                product</button></a></div>
+                                                product</button></a></p>
                                     </td>
                                 </tr>
                             </table>
