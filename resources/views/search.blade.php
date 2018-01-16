@@ -63,7 +63,7 @@
                                 @foreach($categories->toArray() as $category)
 
                                     <div class="col-4 mt-3 mt-2" style="text-align: center;">
-                                        <button type="button" class="btn btn-sm btn-outline-primary fil-cat"><a href="/products?type={{str_replace(' ','-',$category['type'])}}">{{$category['type']}}</a></button>
+                                        <a href="/products?type={{str_replace(' ','-',$category['type'])}}"><button type="button" class="btn btn-sm btn-outline-primary fil-cat">{{$category['type']}}</button></a>
                                     </div>
                                 @endforeach
                             </div>
