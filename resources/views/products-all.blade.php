@@ -18,7 +18,10 @@
                         <div style="border-bottom:1px solid #efefef;" class="row pb-3 mb-3 mt-3 tile scale-anm {{str_replace(' ', '-',$product['type'])}} all">
                             <table class="">
                                 <tr>
-                                    <td style="width:200px;"><img  style="width:80%; height:auto; float:left;" src="{{$product['primary_image']}}" alt="{{$product['name']}}" /></td>
+                                    <td style="width:200px; text-align: center;">
+                                        <img  style="width:80%; height:auto; float:left;" src="{{$product['primary_image']}}" alt="{{$product['name']}}" />
+                                        <img src="/images/brands/{{str_replace(' ','-',$product['brand'])}}.jpg" style="margin:15px auto; width:75px; height:auto;"/>
+                                    </td>
                                     <td>
                                         <h3>{{$product['name']}}</h3>
                                         <span class="category-{{$product['type']}} product-category rounded-1">{{$product['type']}}</span><br/>

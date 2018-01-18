@@ -38,9 +38,10 @@ class SearchController extends Controller
      */
     public function querySearch(Request $request)
     {
+        /** @var User query $query */
         $query = $request->input('q');
+        /** @var  Hydrated by click event on user brand $brand */
         $brand = $request->input('b');
-
 
         if ($query == null) {
             return [
@@ -49,9 +50,9 @@ class SearchController extends Controller
             ];
         }
 
-        $query = $brand !== null ? $query . ' ' . $brand : $query;
-        $response = $this->searchInterfaceService->querySearch(urlencode($query));
+        $query = $brand !== null ? $brand . ' ' . $query : $query;
 
+        $response = $this->searchInterfaceService->querySearch(urlencode($query));
 
         if($response['hits'] == null || empty($response['hits'])) {
             return [
@@ -59,21 +60,21 @@ class SearchController extends Controller
             ];
         }
 
+        $products = collect($response['hits']);
+        $products = $products->map(function ($product) {
+            $product['type_encoded'] = str_replace(' ','-',$product['type']);
+            return $product;
+        });
 
-        $collection = collect($response['hits'])->forget('objectID');
-
-        $brands = $collection->mapToGroups(function ($item, $key) {
+        $brands = $products->mapToGroups(function ($item, $key) {
             return [$item['brand']];
         })->flatten(2)->unique()->flatten(2);
 
-        //$types = $collection->mapToGroups(function ($item, $key) {
-        //    return [$item['type']];
-        //})->flatten(2)->unique()->flatten(2);
+
 
         $returnData = [
             'brands' =>  $brands,
-            //'types' => $types,
-            'results' => $response['hits'],
+            'results' => $products,
         ];
 
         return response()->json($returnData);

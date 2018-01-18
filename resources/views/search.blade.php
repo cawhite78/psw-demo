@@ -32,6 +32,7 @@
                         <div class="row mb-5 pb-3" style="border-bottom:1px solid #efefef;">
                             <div class="col-2">
                                 <img src="{{$product['primary_image']}}" width="100%"/>
+                                <img src="/images/brands/{{str_replace(' ','-',$product['brand'])}}.jpg" style="margin-top: 15px; width:75px; height:auto;"/>
                             </div>
                             <div class="col-10">
                                 <h4>{{$product['name']}}</h4>

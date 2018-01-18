@@ -8,12 +8,14 @@
         </div>
 
         <div class="row mb-3" style="min-height:30px;">
-            <div class="col-4 text-left">
-                <span v-if="q.length && !suggests.length">Search for <em>{{q}}</em></span>
-                <!--<span v-else-if="q.length && suggests.length">Did you mean <em>{{ suggests }}</em>  <button-->
+            <div class="col-6 text-left">
+                <span v-if="q.length">Search for keyword <em>{{q}}</em>
+                    <span v-if="b.length"> with brand <em>{{b}}</em><img style="margin-left:10px; width:64px; height:auto;" v-bind:src="'/images/brands/' + b.replace(' ','-') + '.jpg'"/> </span>
+                </span>
+
                 <!--v-on:click="suggestsClick();">Yes</button></span>-->
             </div>
-            <div class="col-4"></div>
+            <div class="col-2"></div>
             <div class="col-4 text-right">
                 <span v-if="!q.length"></span>
                 <span v-else-if="results.length == 1">We found 1 result</span>
@@ -22,13 +24,12 @@
             </div>
         </div>
 
-
         <div class="row" v-if = "q.length > 2 && results.length">
             <div class="col-12">
                 <div v-if="brands.length > 1">
-                    <button class="btn btn-sm btn-outline-primary mr-2" v-on:click="filterByBrand('')">all</button>
+                    <button class="btn btn-sm btn-outline-primary mr-2 mb-2" v-on:click="filterByBrand('')">all</button>
                 <span  v-for="brand in brands">
-                    <button class="btn btn-sm btn-outline-primary mr-2" v-on:click="filterByBrand(brand)">{{brand}}</button>
+                    <button class="btn btn-sm btn-outline-primary mr-2 mb-2" v-on:click="filterByBrand(brand)">{{brand}}</button>
                 </span>
                 </div>
             </div>
@@ -41,7 +42,7 @@
                         <div class="col-12">
                             <span class="brand">{{ result.brand }}</span>
                             <h3>{{ result.name }}</h3>
-                            <span :class="['category-' + result.type, 'product-category', 'rounded-1']"><a v-bind:href="'/products?type=' + result.type.replace(' ', '-')">{{result.type}}</a></span>
+                            <span :class="['category-' + result.type, 'product-category', 'rounded-1']"><a v-bind:href="'/products?type=' + result.type_encoded">{{result.type}}</a></span>
                         </div>
                     </div>
                     <div class="row">
@@ -58,13 +59,21 @@
 
                             <div v-if="result.score" class="m-3">Score: {{result.score}}</div>
 
+
                         </div>
                         <div class="col-4">
 
                             <img v-bind:src="result.primary_image"
-                                 style="width:200px; height:auto; float:right;">
+                                 style="width:185px; height:auto; float:right;">
                         </div>
 
+                    </div>
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4 mt-3 mb-3 text-center">
+
+                            <img style="margin-left:10px; width:85px; height:auto;" v-bind:src="'/images/brands/' + result.brand.replace(' ','-') + '.jpg'"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,6 +102,11 @@
         endpoint: this.dsmysql ? '/api/search-mysql' : '/api/search',
       }
     },
+    mounted() {
+        this.q = '';
+        this.b = '';
+        this.t = '';
+    },
     methods: {
       highlight(description) {
         return description;
@@ -112,10 +126,11 @@
         }
       },
       initGetSearch() {
-        setTimeout(this.getSearch(), 500);
+        this.b ='';
 
         if(this.q.length > 2) {
           $('.content-area').hide();
+          setTimeout(this.getSearch(), 500);
         } else {
           $('.content-area').show();
         }
@@ -162,7 +177,7 @@
 
       },
       filterByBrand(brand) {
-        this.brand = brand;
+        this.b = brand;
         this.sortByBrand(brand);
       },
       getSpellCheck() {

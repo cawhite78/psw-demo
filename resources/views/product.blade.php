@@ -19,10 +19,10 @@
                 <strong>Brand: {{$product['brand']}}</strong><br/>
                 <span class="category-{{$product['type']}} product-category rounded-1"><a href="/products?type={{str_replace(' ','-', $product['type'])}}">{{$product['type']}}</a></span><br/>
                 <p>{{$product['description']}}</p>
-
+                <img src="/images/brands/{{str_replace(' ','-',$product['brand'])}}.jpg" style="margin:15px auto; width:75px; height:auto;"/>
                 <div class="row">
                     @if(count($types) > 0)
-                        <div class="col-6 pr-4">
+                        <div class="col-6 pr-4 mt-3">
                             <h4>Others viewed for type <a style="font-weight: bold; text-decoration: underline" href="/products?type={{str_replace(' ', '-',$product['type'])}}">{{$product['type']}}</a></h4>
                             <hr/>
                             @php
@@ -53,7 +53,7 @@
                     @endif
 
                     @if(count($brand) > 0)
-                        <div class="col-6 pl-4">
+                        <div class="col-6 pr-4 mt-3">
                             <h4>Other products by {{$product['brand']}}</h4>
                             <hr/>
                             @foreach($brand as $brandItem)
