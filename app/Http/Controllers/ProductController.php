@@ -32,20 +32,10 @@ class ProductController extends Controller
         ]);
     }
 
-    public function productsAllFormer(Request $request)
-    {
-        $type = $request->input('t');
-        $brand = $request->input('b');
-
-        return view('products-all',
-            [
-                'type' => isset($type) && $type !== null ? $type : 0,
-                'brand' => isset($brand) && $brand !== null ? $brand: 0
-            ]
-        );
-    }
-
-
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function productsAll(Request $request)
     {
         $productParam = $request->input('type');

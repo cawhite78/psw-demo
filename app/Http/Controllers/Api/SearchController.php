@@ -81,6 +81,10 @@ class SearchController extends Controller
 
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
     public function querySearchFull(Request $request)
     {
         $query = $request->input('q');
@@ -93,6 +97,7 @@ class SearchController extends Controller
         }
 
         $response = $this->searchInterfaceService->querySearch($query);
+
         if($response['hits'] == null || empty($response['hits'])) {
             return [
                 'results' => false,
@@ -104,6 +109,10 @@ class SearchController extends Controller
         ];
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
     public function querySearchMysql(Request $request)
     {
         $query = $request->input('q');

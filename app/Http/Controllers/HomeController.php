@@ -8,45 +8,25 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index2()
-    {
-        return view('home');
-    }
-
-    public function search(Request $request)
+    public function index(Request $request)
     {
         $searchSource = $request->input('ds');
-        if(isset($searchSource)) {
-            return view('search',['ds' => $searchSource]);
+
+        if (isset($searchSource)) {
+            return view('search', ['ds' => $searchSource]);
         }
 
         $brands = ProductMaster::select('brand')->groupBy('brand')->get();
         $categories = ProductMaster::select('type')->groupBy('type')->get();
-        $featured = ProductMaster::select('id','type','brand','name','description','primary_image')->limit(10)->get();
-        return view('search',
-            [
+        $featured = ProductMaster::select('id', 'type', 'brand', 'name', 'description', 'primary_image')->limit(10)->get();
+
+        return view('search', [
                 'brands' => $brands,
                 'categories' => $categories,
                 'featured' => $featured,
             ]);
-    }
-
-    public function vueSearch()
-    {
-        return view('vue-search');
     }
 }
