@@ -248,3 +248,26 @@ h2 {
   font-size: 135%;
   color: #606060;
 }
+
+.breadcrumb {
+  background-color: #fff;
+  border-radius: 0.25rem;
+}
+
+footer {
+  text-align:center;
+  border-top:1px solid #efefef;
+  border-bottom:1px solid #efefef;
+  font-size:90%;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
+  background:#fff;
+
+  .footer-copy {
+    font-size:80%;
+  }
+}
+

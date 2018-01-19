@@ -47,7 +47,7 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <p class="description">{{ highlight(result.description.split(" ").splice(0,25).join(" ")) }}
+                            <p class="description">{{ result.description.split(" ").splice(0,25).join(" ") }}
                                 ... <a class="more" v-bind:href="'/product/' + result.id">more</a>
 
                             </p>
@@ -108,17 +108,6 @@
         this.t = '';
     },
     methods: {
-      highlight(description) {
-        return description;
-        let text = this.q;
-
-        let index = description.indexOf(text);
-        if (index >= 0) {
-          return description.substring(0, index) + "<span class='highlight'>" + description.substring(
-            index, index + text.length) + "</span>" + description.substring(index + text.length);
-        }
-        return description.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      },
       autoComplete() {
         this.results = [];
         if (this.q.length > 2) {

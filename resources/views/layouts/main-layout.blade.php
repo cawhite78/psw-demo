@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<div>
+<div id="app">
     <header class="mb-5">
         <div class="navbar navbar-dark bg-dark">
             <div class="container d-flex justify-content-between">
@@ -30,10 +30,13 @@
     </header>
 
     @yield('content')
+
+
 </div>
+@include('sections.footer')
+
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
 
 <script>
   $(function() {

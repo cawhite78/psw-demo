@@ -3,8 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12" id="app">
+            <div class="col-12" >
                 <search-results></search-results>
+                <user-fingerprint></user-fingerprint>
             </div>
         </div>
     </div>

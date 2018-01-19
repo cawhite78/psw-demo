@@ -7,7 +7,7 @@
                 <div class="toolbar mb2 mt2">
                     <button id="button-all" class="btn btn-sm btn-outline-primary fil-cat" data-rel="all">All</button>
                     @foreach($categories->toArray() as $category)
-                        <button id="button-{{str_replace(' ', '-',$category['type'])}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}</button>
+                        <button id="button-{{str_replace(' ', '-',$category['type'])}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}s</button>
                     @endforeach
                 </div>
 

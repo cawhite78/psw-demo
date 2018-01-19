@@ -8,18 +8,35 @@
     --}}
 @extends('layouts.main-layout')
 @section('content')
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-12" >
+                <search-results></search-results>
+                <user-fingerprint></user-fingerprint>
+            </div>
+        </div>
+    </div>
     @php
         $images = json_decode($product['images'],1);
     @endphp
-    <div class="container" id="app">
-        <div class="row">
+    <div class="container content-area" >
+        <div class="row pl-4 pr-4 mb-3">
+            <div class="col-12">
+                <nav class="breadcrumb">
+                    <a class="breadcrumb-item" href="/"><img src="/images/psw-home.png"/></a>
+                    <a class="breadcrumb-item" href="/products">products</a>
+                    <a class="breadcrumb-item" href="/products?type={{$product['type']}}">{{$product['type']}}s</a>
+                    <span class="breadcrumb-item active">{{$product['name']}}</span>
+                </nav>
+            </div>
+        </div>
+        <div class="row pl-4 pr-5">
             <div class="col-lg-8 col-md-12">
                 <h2>{{$product['name']}}</h2>
-
-                <strong>Brand: {{$product['brand']}}</strong><br/>
-                <span class="category-{{$product['type']}} product-category rounded-1"><a href="/products?type={{str_replace(' ','-', $product['type'])}}">{{$product['type']}}</a></span><br/>
-                <p>{{$product['description']}}</p>
+                {{--<span class="category-{{$product['type']}} product-category rounded-1"><a href="/products?type={{str_replace(' ','-', $product['type'])}}">{{$product['type']}}</a></span><br/>--}}
                 <img src="/images/brands/{{str_replace(' ','-',$product['brand'])}}.jpg" style="margin:15px auto; width:75px; height:auto;"/>
+
+                <p>{{$product['description']}}</p>
                 <div class="row">
                     @if(count($types) > 0)
                         <div class="col-6 pr-4 mt-3">
