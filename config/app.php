@@ -3,7 +3,7 @@
 if(env('APP_ENV') == 'local') {
     $url = 'http://pswdemo.test';
 } else {
-    $url = 'https://sobiphx.com';
+    $url = 'https://www.sobiphx.com/';
 }
 return [
 
