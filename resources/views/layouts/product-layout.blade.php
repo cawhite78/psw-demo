@@ -33,7 +33,6 @@
 @include('sections.footer')
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
 
 <script>
 

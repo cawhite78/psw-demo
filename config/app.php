@@ -1,5 +1,10 @@
 <?php
 
+if(env('APP_ENV') == 'local') {
+    $url = 'http://pswdemo.test';
+} else {
+    $url = 'https://sobiphx.com';
+}
 return [
 
     /*
@@ -52,7 +57,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    //'url' => env('APP_URL', 'http://localhost'),
+    'url' => $url,
 
     /*
     |--------------------------------------------------------------------------
