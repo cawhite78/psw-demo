@@ -1,13 +1,24 @@
 @extends('layouts.product-layout')
 @section('content')
     <div class="container" id="app">
+        <div class="row mb-3">
+            <div class="col-12">
+                <nav class="breadcrumb">
+                    <a class="breadcrumb-item" href="/"><img src="/images/psw-home.png"/></a>
+                    <a class="breadcrumb-item" href="/products">products</a>
+                    <span class="breadcrumb-item active" id="current-category"></span>
+
+                </nav>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12" id="app">
 
                 <div class="toolbar mb2 mt2">
-                    <button id="button-all" class="btn btn-sm btn-outline-primary fil-cat" data-rel="all">All</button>
+                    <button data-category="all" id="button-all" class="btn btn-sm btn-outline-primary fil-cat" data-rel="all">All</button>
                     @foreach($categories->toArray() as $category)
-                        <button id="button-{{str_replace(' ', '-',$category['type'])}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}s</button>
+                        <button data-category="{{$category['type']}}"id="button-{{str_replace(' ', '-',$category['type'])}}" class="btn btn-sm btn-outline-primary fil-cat" data-rel="{{str_replace(' ', '-',$category['type'])}}">{{ucfirst($category['type'])}}s</button>
                     @endforeach
                 </div>
 
@@ -24,7 +35,7 @@
                                     </td>
                                     <td>
                                         <h3>{{$product['name']}}</h3>
-                                        <span class="category-{{$product['type']}} product-category rounded-1">{{$product['type']}}</span><br/>
+                                        {{--<span class="category-{{$product['type']}} product-category rounded-1">{{$product['type']}}</span><br/>--}}
                                         {{truncateContent($product['description'],100,'.')}}  <a class="product-button"
                                                                                                     href="/product/{{$product['id']}}">Read
                                                     more</a>

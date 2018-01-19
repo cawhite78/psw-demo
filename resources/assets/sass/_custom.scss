@@ -256,18 +256,18 @@ h2 {
 
 footer {
   text-align:center;
-  border-top:1px solid #efefef;
-  border-bottom:1px solid #efefef;
+  border-top:2px solid #989898;
   font-size:90%;
   position:fixed;
   left:0px;
   bottom:0px;
   height:30px;
   width:100%;
-  background:#fff;
+  background:#989898;
 
   .footer-copy {
     font-size:80%;
+    color: #d7d7d7;
   }
 }
 

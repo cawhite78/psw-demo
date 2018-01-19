@@ -20,7 +20,7 @@
         $images = json_decode($product['images'],1);
     @endphp
     <div class="container content-area" >
-        <div class="row pl-4 pr-4 mb-3">
+        <div class="row mb-3 mt-0">
             <div class="col-12">
                 <nav class="breadcrumb">
                     <a class="breadcrumb-item" href="/"><img src="/images/psw-home.png"/></a>

@@ -30,6 +30,7 @@
 
     @yield('content')
 </div>
+@include('sections.footer')
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/fingerprintjs2@1/dist/fingerprint2.min.js"></script>
@@ -42,13 +43,20 @@
     $("#portfolio div").not("."+fromParamSelected).fadeOut().removeClass('scale-anm');
     fromParam.addClass('active');
 
+    var breadCurrent = fromParam.attr("data-category") !== "all" ? fromParam.attr("data-category") + 's' :fromParam.attr("data-category");
+
+    $("#current-category").text(breadCurrent);
+
 
     var selectedClass = "";
     $(".fil-cat").click(function(){
       selectedClass = $(this).attr("data-rel");
       $("#portfolio").fadeTo(100, 0.1);
       $("#portfolio div").not("."+selectedClass).fadeOut().removeClass('scale-anm');
+
       $("#button-{{$productParam}}").removeClass('active');
+      var currCategory = $(this).attr("data-category");
+      $("#current-category").text(currCategory === "all" ? "all" : currCategory + 's');
 
       setTimeout(function() {
         $("."+selectedClass).fadeIn().addClass('scale-anm');
