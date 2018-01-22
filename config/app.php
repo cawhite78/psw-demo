@@ -127,7 +127,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => 'daily',
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -183,7 +183,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\SearchServiceProvider::class,
-        App\Providers\SuggestsServiceProvider::class
+        App\Providers\SuggestsServiceProvider::class,
+        App\Providers\UserActivityServiceProvider::class
     ],
 
     /*

@@ -8,6 +8,7 @@ use App\Models\ProductMaster;
 use App\Services\AlgoliaSearchService;
 use App\Services\BingSpellingService;
 use App\Services\SearchInterfaceService;
+use App\Services\User\UserActivityService;
 use App\Traits\SuggestsStringReplacement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,13 +24,20 @@ class SearchController extends Controller
     protected $searchInterfaceService;
 
     /**
+     * @var \App\Services\User\UserActivityService
+     */
+    protected $userActivityService;
+
+    /**
      * SearchController constructor.
      *
      * @param \App\Services\SearchInterfaceService $searchInterfaceService
+     * @param \App\Services\User\UserActivityService $userActivityService
      */
-    public function __construct(SearchInterfaceService $searchInterfaceService)
+    public function __construct(SearchInterfaceService $searchInterfaceService, UserActivityService $userActivityService)
     {
         $this->searchInterfaceService = $searchInterfaceService;
+        $this->userActivityService = $userActivityService;
     }
 
     /**
@@ -59,6 +67,8 @@ class SearchController extends Controller
                 'results' => false,
             ];
         }
+
+        $this->userActivityService->setUserSearch($query);
 
         $products = collect($response['hits']);
         $products = $products->map(function ($product) {

@@ -14,6 +14,7 @@
 
         <div class="row">
             <div class="col-12" id="app">
+                <user-fingerprint></user-fingerprint>
 
                 <div class="toolbar mb2 mt2">
                     <button data-category="all" id="button-all" class="btn btn-sm btn-outline-primary fil-cat" data-rel="all">All</button>
