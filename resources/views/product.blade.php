@@ -25,7 +25,7 @@
                 <nav class="breadcrumb">
                     <a class="breadcrumb-item" href="/"><img src="/images/psw-home.png"/></a>
                     <a class="breadcrumb-item" href="/products">products</a>
-                    <a class="breadcrumb-item" href="/products?type={{$product['type']}}">{{$product['type']}}s</a>
+                    <a class="breadcrumb-item" href="/products?type={{str_replace(' ','-',$product['type'])}}">{{$product['type']}}s</a>
                     <span class="breadcrumb-item active">{{$product['name']}}</span>
                 </nav>
             </div>

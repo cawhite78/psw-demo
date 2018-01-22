@@ -68,7 +68,7 @@ class SearchController extends Controller
             ];
         }
 
-        //$this->userActivityService->setUserSearch($query);
+        $this->userActivityService->setUserSearch($query);
 
         $products = collect($response['hits']);
         $products = $products->map(function ($product) {
