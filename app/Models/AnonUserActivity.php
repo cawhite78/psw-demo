@@ -36,7 +36,7 @@ class AnonUserActivity extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\AnonUser','anon_user','id');
+        return $this->belongsTo('App\Models\AnonUser','id','anon_user');
     }
 
 }

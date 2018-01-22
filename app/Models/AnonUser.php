@@ -30,6 +30,6 @@ class AnonUser extends Model
      */
     public function activity()
     {
-        return $this->hasMany('App\Models\AnonUserActivity','id','anon_user');
+        return $this->hasMany('App\Models\AnonUserActivity','anon_user','id');
     }
 }

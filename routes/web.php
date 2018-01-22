@@ -20,4 +20,5 @@ Route::get('api/product/{productId}','Api\ProductController@getProduct');
 Route::get('api/products','Api\ProductController@getAllProducts');
 
 Route::get('api/anon-user/{anonId}', 'Api\AnonymousUserController@setUserAnonIdWithViewActivity');
+Route::get('api/get-anon-user/{anonId}', 'Api\AnonymousUserController@getUserWithActivity');
 

@@ -35,9 +35,24 @@ class AnonymousUserController extends Controller
         /** @var AnonUser $anonUser */
         $anonUser = AnonUser::updateOrCreate(['id' => $anonId]);
 
+        $request->session()->put(['anon_user_id' => $anonId]);
+
         $anonUserActivity = $this->userActivityService->setUserViews($anonId, $view);
 
         return $anonUserActivity;
+    }
+
+    public function getUserWithActivity($anonId)
+    {
+        $anon = AnonUser::with('activity')->where(['id' => $anonId])->get();
+
+        if(!$anon) {
+            return response()->json([
+               'message' => 'user with anonymous id ' . $anonId . ' does not exist',
+            ]);
+        }
+
+        return response()->json($anon);
     }
 
 

@@ -25,9 +25,8 @@
             axios.get(endpoint,{params: {
               view: window.location.pathname
             }}).then(response => {
-              console.log(response);
+              console.log(response.data);
               if (!response) {
-                console.log(response);
                 document.cookie = "_psw_anonId=" + result;
               }
             });
